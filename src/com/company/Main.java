@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -34,6 +35,8 @@ public class Main {
                     searchForItem();
                     break;
                 case 6:
+                    processArrayList();
+                case 7:
                     quit = true;
             }
 
@@ -58,30 +61,37 @@ public class Main {
     }
 
     public static void modifyItem() {
-        System.out.println("Enter item number: ");
-        int itemNo = scan.nextInt();
-        scan.nextLine();
+        System.out.println("Enter item name: ");
+        String itemNo = scan.nextLine();
         System.out.println("Enter replacement item: ");
         String newItem = scan.nextLine();
-        groceryList.modifyGroceryList(itemNo-1, newItem);
+        groceryList.modifyGroceryList(itemNo, newItem);
     }
 
     public static void removeItem() {
-        System.out.println("Enter item number : ");
-        int itemNo = scan.nextInt();
-        scan.nextLine();
-        groceryList.removeGroceryItem(itemNo-1);
+        System.out.println("Enter item name : ");
+        String itemNo = scan.nextLine();
+        groceryList.removeGroceryItem(itemNo);
     }
 
     public static void searchForItem() {
         System.out.println("Enter item: ");
         String searchItem = scan.nextLine();
-        if (groceryList.findItem(searchItem) != null) {
+        if (groceryList.onFile(searchItem)) {
             System.out.println("Found " + searchItem + " in our groceryList");
         }
         else {
             System.out.println(searchItem + " is not in the shopping list");
         }
+    }
+
+    public static void processArrayList() {
+        ArrayList<String> newArray = new ArrayList<>();
+        newArray.addAll(groceryList.getGroceryList());
+
+//        can also be written as happens at the time you are you are creating the array
+        ArrayList<String> name = new ArrayList<>(groceryList.getGroceryList());
+      
     }
 
 }
